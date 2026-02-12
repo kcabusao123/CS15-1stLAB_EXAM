@@ -57,7 +57,6 @@ class Transaction:
             print("Insufficient balance.")
         else:
             self.withdraw_with_fee(amount)
-            self.bank_account.data["account_balance"] -= amount
             print(f"Withdrawn: {amount}")
 
     def show_balance(self):
@@ -73,12 +72,11 @@ class Transaction:
 
         if total > balance:
             print("Not enough balance including fee.")
-            okay = False
         else:
             self.bank_account.data["account_balance"] -= fee
-            okay = True
+            self.bank_account.data["account_balance"] -= amount
 
-        return okay
+
 
 
 print("\n========================================")
@@ -89,3 +87,4 @@ print("========================================\n")
 bank_account = BankAccount(account_no, account_name)
 transaction = Transaction(bank_account)
 transaction.menu()
+
